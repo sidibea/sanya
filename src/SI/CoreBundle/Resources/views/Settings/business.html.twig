@@ -1,0 +1,125 @@
+{% extends "SICoreBundle::layout.html.twig" %}
+{% block title %} Paramètres {% endblock %}
+{% block breadcumb %}
+    <section class="content-header">
+        <h1>
+            Paramètres de votre société
+            <small>Utilisez ces options pour gérer les paramètres de votre socie</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <!-- Left col -->
+    <section class="col-lg-12">
+    <!-- Chat box -->
+        {{ form_start(form) }}
+
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+        <div class="box box-success">
+
+            <div class="box-body chat" id="chat-box">
+                <div class="form-group control-group">
+                    {{ form_label(form.name, "Nom de l'entreprise ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.name) }}
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.address, "Adresse ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.address) }}
+                    {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.poste, "Code postal ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.poste) }}
+                    {{ form_widget(form.poste, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.city, "Ville ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.city) }}
+                    {{ form_widget(form.city, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.telephone, "Telephone ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.telephone) }}
+                    {{ form_widget(form.telephone, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.mobile, "Mobile ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.mobile) }}
+                    {{ form_widget(form.mobile, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.email, "Adresse mail ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.website, "Site web ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.website) }}
+                    {{ form_widget(form.website, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.siret, "Numéro Siret ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.siret) }}
+                    {{ form_widget(form.siret, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.capital, "Capital social ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.capital) }}
+                    {{ form_widget(form.capital, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.forme, "Forme juridique ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.forme) }}
+                    {{ form_widget(form.forme, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="form-group control-group">
+                    {{ form_label(form.nTva, "N° TVA ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.nTva) }}
+                    {{ form_widget(form.nTva, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+            </div>
+            <div class="box-footer">
+                <input type="submit" class="btn btn-success" value="Sauvegarder">
+                <input type="button" class="btn" value="Annuler" onclick="window.location.href='{{ path('si_core_setting') }}';">
+
+            </div>
+
+        </div>
+        {{ form_rest(form) }}
+
+        {# Fermeture de la balise <form> du formulaire HTML #}
+        {{ form_end(form) }}
+    </section>
+
+{% endblock %}

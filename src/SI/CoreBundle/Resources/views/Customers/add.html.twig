@@ -1,0 +1,136 @@
+{% extends "SICoreBundle::layout.html.twig" %}
+{% block title %} Clients {% endblock %}
+{% block breadcumb %}
+    <section class="content-header">
+        <h1>
+            Nouveau Clients
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <!-- Left col -->
+    <section class="col-lg-12">
+        <!-- Chat box -->
+        {{ form_start(form) }}
+
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+        <div class="box box-success">
+
+            <div class="box-body chat" id="chat-box">
+                <div class="row">
+                    <div class="col-xs-6">
+                        {{ form_label(form.name, "Nom ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.name) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        {{ form_label(form.societe, "Societe ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.societe) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-institution"></i></span>
+                            {{ form_widget(form.societe, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        {{ form_label(form.telephone, "Telephone ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.telephone) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            {{ form_widget(form.telephone, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        {{ form_label(form.mobile, "Mobile ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.mobile) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            {{ form_widget(form.mobile, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        {{ form_label(form.email, "Email ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.email) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        {{ form_label(form.nTva, "N° TVA ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.nTva) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            {{ form_widget(form.nTva, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        {{ form_label(form.ville, "Ville ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.ville) }}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-institution"></i></span>
+                            {{ form_widget(form.ville, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{ form_label(form.adresePrincipale, "Adresse ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.adresePrincipale) }}
+                        {{ form_widget(form.adresePrincipale, {'attr': {'class': 'form-control', 'rows':'5', 'placeholder' : '' }}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{ form_label(form.noteInterne, "Note Interne ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.noteInterne) }}
+                        {{ form_widget(form.noteInterne, {'attr': {'class': 'form-control', 'placeholder' : '', 'rows':'5' }}) }}
+                    </div>
+                </div>
+
+            </div>
+            <div class="box-footer">
+                <input type="submit" class="btn btn-success" value="Sauvegarder">
+                <input type="button" class="btn" value="Annuler" onclick="window.location.href='{{ path('si_core_customers') }}';">
+
+            </div>
+
+        </div>
+        {{ form_rest(form) }}
+
+        {# Fermeture de la balise <form> du formulaire HTML #}
+        {{ form_end(form) }}
+    </section>
+
+{% endblock %}

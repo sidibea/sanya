@@ -1,0 +1,187 @@
+{% extends "SICoreBundle::layout.html.twig" %}
+{% block title %} Nouveau devis client {% endblock %}
+{% block breadcumb %}
+    <section class="content-header">
+        <h1>
+            Nouveau devis client
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+{% endblock %}
+
+{% block content %}
+<!-- Left col -->
+<section class="col-lg-12">
+    <!-- Chat box -->
+    {{ form_start(form) }}
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors(form) }}
+    <div class="box box-success">
+
+        <div class="box-body chat" id="chat-box">
+            <div class="row">
+                <div class="col-xs-3">
+                    {{ form_label(form.customer, "Client ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.customer) }}
+                        {{ form_widget(form.customer, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="col-xs-2">
+                    {{ form_label(form.dateQuotation, "Date devis ") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.dateQuotation) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        {{ form_widget(form.dateQuotation, {'attr': {'class': 'form-control datepicker', 'placeholder' : '' }}) }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    {{ form_label(form.dateExpiration, "Date d'expiration") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.dateExpiration) }}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        {{ form_widget(form.dateExpiration, {'attr': {'class': 'form-control datepicker', 'placeholder' : '' }}) }}
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    {{ form_label(form.reference, "Référence") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.reference) }}
+                        {{ form_widget(form.reference, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+                <div class="col-xs-2">
+                    {{ form_label(form.paymentMethods, "Mode de paiement") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.paymentMethods) }}
+                    {{ form_widget(form.paymentMethods, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                </div>
+            </div>
+
+                <div class="form-group">
+                    {{ form_label(form.quotationItems, "Elements") }}
+
+                    {# Affichage des erreurs pour ce champ précis. #}
+                    {{ form_errors(form.quotationItems) }}
+                    {{ form_widget(form.quotationItems, {'attr': {'class': '', 'placeholder' : '' }}) }}
+                </div>
+
+
+
+        </div>
+        <div class="box-footer">
+            <input type="submit" class="btn btn-success" value="Sauvegarder">
+            <input type="button" class="btn" value="Annuler" onclick="window.location.href='{{ path('si_core_customers') }}';">
+
+        </div>
+
+    </div>
+    {{ form_rest(form) }}
+
+    {# Fermeture de la balise <form> du formulaire HTML #}
+    {{ form_end(form) }}
+</section>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        "use strict";
+
+        $(function () {
+
+            //Activate the iCheck Plugin
+            $('input[type="radio"]').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            });
+
+            $(".datepicker").datepicker({
+                minDate:0,
+                format: 'dd/mm/yyyy'
+            });
+
+            $.getScript('http://timschlechter.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.js',function(){
+
+            });
+
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+            var $container = $('div#quotations_quotationItems');
+
+            // On ajoute un lien pour ajouter une nouvelle catégorie
+            var $addLink = $('<a href="#" id="add_category"  class="btn btn-default">Ajouter un element</a>');
+            $container.append($addLink);
+
+            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+            $addLink.click(function(e) {
+                addCategory($container);
+                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                return false;
+            });
+
+            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+            var index = $container.find(':input').length;
+
+            // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+            if (index == 0) {
+                addCategory($container);
+            } else {
+                // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+                $container.children('div').each(function() {
+                    addDeleteLink($(this));
+                });
+            }
+
+            // La fonction qui ajoute un formulaire Categorie
+            function addCategory($container) {
+                // Dans le contenu de l'attribut « data-prototype », on remplace :
+                // - le texte "__name__label__" qu'il contient par le label du champ
+                // - le texte "__name__" qu'il contient par le numéro du champ
+                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Produit n°' + (index+1))
+                        .replace(/__name__/g, index));
+
+                // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+                addDeleteLink($prototype);
+
+                // On ajoute le prototype modifié à la fin de la balise <div>
+                $container.append($prototype);
+
+                // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                index++;
+            }
+
+            // La fonction qui ajoute un lien de suppression d'une catégorie
+            function addDeleteLink($prototype) {
+                // Création du lien
+                $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+                // Ajout du lien
+                $prototype.append($deleteLink);
+
+                // Ajout du listener sur le clic du lien
+                $deleteLink.click(function(e) {
+                    $prototype.remove();
+                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                    return false;
+                });
+            }
+        });
+    </script>
+
+
+{% endblock %}

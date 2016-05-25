@@ -1,0 +1,93 @@
+{% extends "SICoreBundle::layout.html.twig" %}
+{% block title %} Paramètres {% endblock %}
+{% block breadcumb %}
+    <section class="content-header">
+        <h1>
+            Gestion Multi-utilisateurs
+            <small>Cette interface permet de créer de nouveaux utilisateurs pour un même dossier.</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+{% endblock %}
+
+{% block content %}
+<!-- Left col -->
+<section class="col-lg-12">
+
+    <div class="box box-success ">
+
+        <br><div class="col-xs-2">
+            <a href="{{ path('si_core_setting_user_mew') }}" class="btn btn-block btn-primary btn-lg">Créer utilisateur</a>
+        </div>
+
+        <div class="box-body chat" id="chat-box">
+            <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Adresse mail</th>
+                    <th>Activé </th>
+                    <th>Role</th>
+                    <th>Derniere connexion</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, val in users %}
+                <tr>
+                    <td>{{ val.firstname }}</td>
+                    <td>{{ val.lastname }}</td>
+                    <td>{{ val.email }}</td>
+                    <td> 4</td>
+                    <td> {{ val.roles.0 }} </td>
+                    <td>{{ val.lastLogin | date('d F Y h:i:s') }}</td>
+                    <td>
+                        <div class="btn-group bg-blue">
+
+                            <a style="font-size: 14px;" href="{{ path('si_core_setting_user_mew', {'id': val.id}) }}"  title="" class="btn btn-mini" data-original-title="Modifier"><i class="fa fa-pencil"></i></a>
+
+                            <a style="font-size: 14px;" class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)"><span class="hidden-phone">Plus</span> <span class="caret"></span></a>
+                            <ul style="font-size: 14px;" class="dropdown-menu right">
+                                <li>
+                                    <!--<a href="/landlord/#properties/80786/view" data-toggle="tooltip" data-placement="left" title="Afficher la fiche produit" name="Afficher" class=""><i class="icon-search"></i> Fiche produit</a>-->
+                                    <a href="" onclick=" return confirm('Attention ! en supprimant ce bus, toutes les informations liées a ce bus seront supprimées ');" title="" ><i class="icon-remove"></i> Supprimer</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="box-footer">
+            <input type="submit" class="btn btn-success" value="Sauvegarder">
+            <input type="button" class="btn" value="Annuler" onclick="window.location.href='{{ path('si_core_setting') }}';">
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        $(function () {
+            $('#example2').dataTable({
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": true,
+                "bAutoWidth": false
+            });
+        });
+    </script>
+{% endblock %}

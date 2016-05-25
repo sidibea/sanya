@@ -1,0 +1,74 @@
+{% extends "SICoreBundle::layout.html.twig" %}
+{% block title %} Paramètres {% endblock %}
+{% block breadcumb %}
+    <section class="content-header">
+        <h1>
+            Paramètres
+            <small>Vous permet de configurer vos paramètres</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <!-- Main row -->
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+            <!-- Chat box -->
+            <div class="box box-success">
+                <div class="box-header">
+                    <i class="fa fa-comments-o"></i>
+                    <h3 class="box-title">Ma société</h3>
+                    <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
+                        <div class="btn-group" data-toggle="btn-toggle" >
+                            <button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i></button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body chat" id="chat-box">
+                    <p>Utilisez ces options pour paramétrer les données personnelles de votre compte  et retrouver les informations administratives de votre société.</p>
+
+                    <div class="panel box box-primary">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">
+                                <i class="fa fa-gear"></i>
+                                <a  href="{{ path('si_core_setting_user') }}"  class="collapsed">
+                                    Paramètres utilisateur
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="panel box box-success">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">
+                                <i class="fa fa-gear"></i>
+                                <a  href="{{ path('si_core_setting_business') }}"  class="collapsed">
+                                    Paramètres de votre société
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">
+                                <i class="fa fa-gear"></i>
+                                <a  href="{{ path('si_core_setting_user_managements') }}"  class="collapsed">
+                                    Gestion Multi-utilisateurs
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

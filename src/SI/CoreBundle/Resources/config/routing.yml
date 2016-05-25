@@ -1,0 +1,85 @@
+si_core_homepage:
+    path:     /
+    defaults: { _controller: SICoreBundle:Dashboard:index }
+
+si_core_setting:
+    path:     /settings
+    defaults: { _controller: SICoreBundle:Settings:index }
+si_core_setting_user:
+    path:     /settings/user
+    defaults: { _controller: SICoreBundle:Settings:user }
+si_core_setting_user_managements:
+    path:     /settings/user_managements
+    defaults: { _controller: SICoreBundle:Settings:userManagements }
+si_core_setting_user_mew:
+    path:     /settings/user_managements/new
+    defaults: { _controller: SICoreBundle:Settings:newUsers }
+
+si_core_setting_business:
+    path:     /settings/business
+    defaults: { _controller: SICoreBundle:Settings:business }
+
+
+si_core_product:
+    path:     /products
+    defaults: { _controller: SICoreBundle:Products:list }
+
+si_core_product_new:
+    path:     /products/new
+    defaults: { _controller: SICoreBundle:Products:new }
+si_core_product_edit:
+    path:     /products/edit/{id}
+    defaults: { _controller: SICoreBundle:Products:edit }
+
+si_core_stockin:
+    path:     /stocksin
+    defaults: { _controller: SICoreBundle:Stocks:list }
+
+si_core_stockin_new:
+    path:     /stocksin/new
+    defaults: { _controller: SICoreBundle:Stocks:new }
+
+si_core_customers:
+    path:     /costumers
+    defaults: { _controller: SICoreBundle:Customers:list }
+si_core_customers_new:
+    path:     /costumers/new
+    defaults: { _controller: SICoreBundle:Customers:new }
+si_core_customers_edit:
+    path:     /costumers/edit/{id}
+    defaults: { _controller: SICoreBundle:Customers:edit }
+
+si_core_suppliers:
+    path:     /suppliers
+    defaults: { _controller: SICoreBundle:Suppliers:list }
+si_core_suppliers_new:
+    path:     /suppliers/new
+    defaults: { _controller: SICoreBundle:Suppliers:new }
+
+si_core_quotation:
+    path:     /sales_quotes
+    defaults: { _controller: SICoreBundle:Quotations:list }
+si_core_quotation_new:
+    path:     /sales_quotes/new
+    defaults: { _controller: SICoreBundle:Quotations:new }
+si_core_quotation_print:
+    path:     /sales_quotes/print/{id}
+    defaults: { _controller: SICoreBundle:Quotations:print }
+
+si_core_invoice:
+    path:     /invoice
+    defaults: { _controller: SICoreBundle:Invoice:list }
+si_core_invoice_new:
+    path:     /invoice/new
+    defaults: { _controller: SICoreBundle:Invoice:new }
+si_core_invoice_print:
+    path:     /invoice/print/{id}
+    defaults: { _controller: SICoreBundle:Invoice:print }
+si_core_invoice_payment:
+    path:     /invoice/{id}
+    defaults: { _controller: SICoreBundle:Invoice:payment }
+
+
+si_core_ajax_product_price:
+    path:     /ajax/product/{id}
+    defaults: { _controller: SICoreBundle:Ajax:produ }

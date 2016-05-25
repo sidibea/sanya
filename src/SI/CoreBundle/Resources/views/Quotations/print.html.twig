@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+
+    <title>Fature Proforma {{ quotations.customer.fullName }}</title>
+
+
+    {% block stylesheets %}
+        {% stylesheets output='css/invoice.css'  filter='cssrewrite, ?yui_css'
+        'admin/bootstrap/css/style.css'
+        'admin/bootstrap/css/print.css'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+    {% block javascripts %}
+        {% javascripts output='js/front.js' filter='yui_js'
+        'admin/plugins/jQuery/jQuery-2.1.3.min.js'
+        'admin/bootstrap/js/example.js'
+
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+
+<body onload="window.print()">
+
+<div id="page-wrap">
+
+    <textarea id="header">Fature Proforma </textarea>
+
+    <div id="identity">
+		
+            <span id="address">Chris Coyier
+123 Appleseed Street
+Appleville, WI 53719
+
+Phone: (555) 555-5555</span>
+
+        <div id="logo">
+            <img id="image" src="images/logo.png" alt="logo" />
+        </div>
+
+    </div>
+
+    <div style="clear:both"></div>
+
+    <div id="customer">
+
+
+            <span id="customer-title">Doit <br>
+                {{ quotations.customer.fullName }}</span>
+
+        <table id="meta">
+            <tr>
+                <td class="meta-head">Facture #</td>
+                <td>DEV{{ quotations.id }}</td>
+            </tr>
+            <tr>
+
+                <td class="meta-head">Date</td>
+                <td><span id="date">{{ quotations.dateQuotation |date('d M Y') }} </span></td>
+            </tr>
+
+
+        </table>
+
+    </div>
+
+    <table id="items">
+
+        <tr>
+            <th>Produit</th>
+            <th>Prix Unitaire</th>
+            <th>Qte</th>
+            <th>Prix Total</th>
+        </tr>
+        {% set total = 0 %}
+
+        {% for key, val in quotations.quotationItems %}
+            <tr class="item-row">
+                <td>{{ val.products.code }}</td>
+                <td>{{ val.products.prixDeVente|number_format(2, '.', ',') }} FCFA</td>
+                <td>{{ val.quantity }}</td>
+                <td>{{ (val.quantity * val.products.prixDeVente)|number_format(2, '.', ',') }} FCFA</td>
+            </tr>
+            {% set total = total + (val.quantity * val.products.prixDeVente) %}
+
+        {% endfor %}
+
+
+        <tr>
+            <td colspan="2" class="blank"> </td>
+            <td colspan="1" class="total-line">Sous Total</td>
+            <td class="total-value"><div id="subtotal">{{ total|number_format(2, '.', ',') }} FCFA</div></td>
+        </tr>
+
+        <tr>
+            <td colspan="2s" class="blank"> </td>
+            <td colspan="1" class="total-line balance">Montant Du</td>
+            <td class="total-value balance"><div class="due">{{ total|number_format(2, '.', ',') }} FCFA</div></td>
+        </tr>
+
+    </table>
+
+    <div id="terms">
+        <h5>Termes</h5>
+        <textarea>En cas de retard de paiement, sera exigible, conformément à l'article L 441-6 du code de commerce, une indemnité forfaitaire pour frais de recouvrement de 15 000 FCFA.</textarea>
+    </div>
+
+</div>
+
+</body>
+
+</html>

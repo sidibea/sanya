@@ -1,0 +1,3 @@
+si_users_homepage:
+    path:     /
+    defaults: { _controller: SIUsersBundle:Default:index }

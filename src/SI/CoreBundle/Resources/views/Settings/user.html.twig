@@ -1,0 +1,70 @@
+{% extends "SICoreBundle::layout.html.twig" %}
+{% block title %} Paramètres {% endblock %}
+{% block breadcumb %}
+    <section class="content-header">
+        <h1>
+            Paramètres utilisateur
+            <small>Modification des informations utilisateur.</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-12">
+            <!-- Chat box -->
+            <div class="box box-success">
+                {{ form_start(form) }}
+
+                {# Les erreurs générales du formulaire. #}
+                {{ form_errors(form) }}
+                <div class="box-body chat" id="chat-box">
+                    <div class="form-group control-group">
+                        {{ form_label(form.firstname, "Prenom ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.firstname) }}
+                        {{ form_widget(form.firstname, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                    </div>
+                    <div class="form-group control-group">
+                        {{ form_label(form.lastname, "Nom ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.lastname) }}
+                        {{ form_widget(form.lastname, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                    </div>
+                    <div class="form-group control-group">
+                        {{ form_label(form.telephone, "Telephone ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.telephone) }}
+                        {{ form_widget(form.telephone, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                    </div>
+                    <div class="form-group control-group">
+                        {{ form_label(form.email, "Adresse mail ") }}
+
+                        {# Affichage des erreurs pour ce champ précis. #}
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder' : '' }}) }}
+                    </div>
+
+                </div>
+                <div class="box-footer">
+                    <input type="submit" class="btn btn-success" value="Sauvegarder">
+                    <input type="button" class="btn" value="Annuler" onclick="window.location.href='{{ path('si_core_setting') }}';">
+
+                </div>
+                {{ form_rest(form) }}
+
+                {# Fermeture de la balise <form> du formulaire HTML #}
+                {{ form_end(form) }}
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
